@@ -169,9 +169,6 @@ public class PurchaseController {
     @ResponseBody
     @PostMapping(value = "reject")
     public String reject(String taskId) {
-        /*HashMap<String, Object> map = new HashMap<>();
-        map.put("auditing", "驳回");
-        taskService.complete(taskId, map);*/
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         if (task == null) {
             throw new RuntimeException("流程不存在");
@@ -220,7 +217,7 @@ public class PurchaseController {
         BpmnModel bpmnModel = repositoryService.getBpmnModel(pi.getProcessDefinitionId());
         ProcessEngineConfiguration engconf = processEngine.getProcessEngineConfiguration();
         ProcessDiagramGenerator diagramGenerator = engconf.getProcessDiagramGenerator();
-        InputStream in = diagramGenerator.generateDiagram(bpmnModel, "png", activityIds, flows, engconf.getActivityFontName(), engconf.getLabelFontName(), engconf.getAnnotationFontName(), engconf.getClassLoader(), 1.0);
+        InputStream in = diagramGenerator.generateDiagram(bpmnModel, "png", activityIds, flows, engconf.getActivityFontName(), engconf.getLabelFontName(), engconf.getAnnotationFontName(), engconf.getClassLoader(), 1.0,false);
         OutputStream out = null;
         byte[] buf = new byte[1024];
         int legth = 0;
